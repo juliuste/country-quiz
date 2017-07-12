@@ -1,0 +1,30 @@
+{
+  "name": "country-quiz",
+  "description": "",
+  "version": "0.0.0",
+  "keywords": [],
+  "author": "Julius Tens <mail@juliustens.de>",
+  "homepage": "https://github.com/juliuste/country-quiz",
+  "repository": "juliuste/country-quiz",
+  "bugs": "https://github.com/juliuste/country-quiz/issues",
+  "dependencies": {
+    "fetch-ponyfill": "^4.0.0",
+    "lodash.pick": "^4.4.0",
+    "lodash.round": "^4.0.4",
+    "lodash.shuffle": "^4.2.0",
+    "node-fetch": "^1.7.1",
+    "number-formatter": "^1.2.0",
+    "pinkie-promise": "^2.0.1",
+    "world-countries": "^1.8.1"
+  },
+  "devDependencies": {
+    "browserify": "^14.1.0"
+  },
+  "scripts": {
+    "build": "browserify index.js > bundle.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "license": "MIT"
+}
