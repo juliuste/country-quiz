@@ -26,6 +26,7 @@ const units = {
 const setSign = (sign) => document.querySelector("#sign").innerHTML = sign
 const setCategory = (category) => document.querySelector("#category").innerHTML = categories[category]
 const setHighscore = (hs) => document.querySelector("#highscore").innerHTML = hs
+const setClickToContinue = (text) => document.querySelector('#continue').innerHTML = text
 
 const setColorClass = (c) => {
 	document.querySelectorAll(".fact").forEach((e) => e.setAttribute('class', 'fact '+c))
@@ -70,16 +71,19 @@ const generateSet = () => {
 
 const reset = () => {
 	locked = false
+	document.querySelector('body').style.cursor = 'initial'
 	setHighscore(highscore)
 	setColorClass('normal')
 	currentSet = generateSet()
 	setCategory(currentSet.category)
 	setSide("left", currentSet.items.left, currentSet.category, false)
 	setSide("right", currentSet.items.right, currentSet.category, false)
+	setClickToContinue('')
 }
 
 const result = (lr) => {
 	locked = true
+	document.querySelector('body').style.cursor = 'pointer'
 	if(lr === currentSet.correct){
 		setColorClass('right')
 		highscore++
@@ -92,6 +96,7 @@ const result = (lr) => {
 	}
 	setSide("left", currentSet.items.left, currentSet.category, true)
 	setSide("right", currentSet.items.right, currentSet.category, true)
+	setClickToContinue('Click to continue')
 }
 
 reset()
@@ -99,5 +104,17 @@ reset()
 document.querySelector("#left").addEventListener('mouseover', (e) => !locked ? setSign('>') : null)
 document.querySelector("#right").addEventListener('mouseover', (e) => !locked ? setSign('<') : null)
 
-document.querySelector("#left").addEventListener('click', () => !locked ? result("left") : reset())
-document.querySelector("#right").addEventListener('click', () => !locked ? result("right") : reset())
+document.querySelector("#left").addEventListener('click', (e) => {
+	if(!locked){
+		e.stopPropagation()
+		result("left")
+	}
+})
+document.querySelector("#right").addEventListener('click', (e) => {
+	if(!locked){
+		e.stopPropagation()
+		result("right")
+	}
+})
+
+document.querySelector('body').addEventListener('click', () => locked ? reset() : null)

@@ -51,6 +51,12 @@ body {
 	margin-bottom: 2em;
 }
 
+#continue{
+	color: #12a5ed;
+	margin-top: 1em;
+	font-size: 2em;
+}
+
 #title{
 	font-size: 4em;
 	font-weight: lighter;
